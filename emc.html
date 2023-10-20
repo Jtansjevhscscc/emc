@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Titre de la page</title>
+
+    <!-- Style pour l'arrière-plan -->
+    <style>
+        body {
+            background-image: url('https://i2-prod.mirror.co.uk/incoming/article5589060.ece/ALTERNATES/s1227b/Bergen-Belsen-concentration-camp.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+    </style>
+
+    <!-- Ressources de la carte interactive -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js">
+    </script>
+   
+   <style>
+        /* Styles pour les images interactives */
+        .image-container {
+            display: flex;
+        }
+
+        .images-zoomables {
+            display: flex;
+        }
+
+        .images-zoomables img {
+            width: 200px;
+            height: 200px;
+            margin-right: 10px;
+            transition: transform 2s;
+        }
+
+        .images-zoomables img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Style pour le texte interactif au dos de l'image */
+        .card {
+            perspective: 1000px;
+            width: 200px;
+            height: 200px;
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 2s;
+        }
+
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+        }
+
+        .card-front {
+            background-color: #0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-back {
+            background-color: #fff; /* Fond */
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .text {
+            color: #000000;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Le camp de concentration de Bergen-Belsen</h1>
+    <!-- Introduction -->
+    <p>Introduction</p>
+    <br>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Bergen-belsen.jpg" alt="Stèle d'entrée du camp" id="photo_introduction">
+    
+    <!-- Ajouter une carte -->
+    <div id="map" style="height: 400px; width: 500px;"></div>
+    <script>
+        var map = L.map('map').setView([52.7578, 9.9078], 7);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        L.marker([52.7578, 9.9078]).addTo(map)
+            .bindPopup('Camp de concentration de Bergen-Belsen')
+            .openPopup();
+    </script>
+    
+    <!-- Images interactives -->
+    <div class="images-zoomables">
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://th.bing.com/th/id/OIP.BM1MkkuDF6d3rX92SWraNQHaGn?pid=ImgDet&rs=1" alt="Conditions de vie">
+                </div>
+                <div class="card-back">
+                    <div class="text">Texte interactif pour l'image 1</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://th.bing.com/th/id/R.45faf29f3a6cf36dcba56a22c69b8c87?rik=kernB0HPhjOoxA&pid=ImgRaw&r=0" alt="2">
+                </div>
+                <div class="card-back">
+                    <div class="text">Texte interactif pour l'image 2</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://th.bing.com/th/id/R.ac6726ceabe70c68c31963cb2e284cf0?rik=BqX1nb65g9FsVQ&riu=http%3a%2f%2fwww.bergenbelsen.co.uk%2fimages%2fContent%2fPhotos%2fDatabase%2fStaff%2fID0430.jpg&ehk=buKDRiDoJq8Y9hYQDLhGKglfeb4vG3OIcD%2fBJzAxZSo%3d&risl=&pid=ImgRaw&r=0" alt="3">
+                </div>
+                <div class="card-back">
+                    <div class="text">Texte interactif pour l'image 3</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
